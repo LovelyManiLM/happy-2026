@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 🎆</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100vh;
+  font-family:Segoe UI, sans-serif;
+  background:#000;
+  color:#00ffe7;
+  overflow:auto;
+}
+body.day{background:#f2f2f2;color:#000;}
+
+.box{
+  width:90%;
+  max-width:420px;
+  margin:20px auto;
+  background:rgba(0,0,0,0.8);
+  border:1px solid #00ffe7;
+  border-radius:16px;
+  padding:25px;
+}
+body.day .box{background:#fff;border-color:#000;}
+
+h1{text-align:center;font-size:22px;}
+.sub{text-align:center;font-size:13px;margin-bottom:15px;color:#9ff;}
+
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:none;
+  font-size:15px;
+}
+
+input{background:#02131a;color:#00ffe7;}
+body.day input{background:#eee;color:#000;}
+
+button{background:#00ffe7;color:#000;font-weight:bold;cursor:pointer;}
+
+#screen{
+  margin-top:20px;
+  max-height:240px;
+  overflow:auto;
+  white-space:pre-line;
+  line-height:1.6;
+}
+
+.share{display:none;margin-top:15px;}
+
+canvas{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:-1;
+}
+
+.theme{
+  position:fixed;
+  top:10px;right:10px;
+  padding:6px 10px;
+  border-radius:6px;
+  background:#00ffe7;
+  color:#000;
+  border:none;
+}
+
+/* Instagram bottom center */
+#insta{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.6);
+  padding:6px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:bold;
+}
+#insta svg{width:16px;height:16px;fill:#ff00ff;}
+body.day #insta{background:rgba(255,255,255,0.6);color:#000;}
+</style>
+</head>
+
+<body>
+
+<canvas id="fw"></canvas>
+<button class="theme" onclick="toggle()">🌗</button>
+
+<div class="box">
+  <h1>🎆 Happy New Year 2026 🎆</h1>
+  <div class="sub">
+    எதிர்காலத்திலிருந்து வந்த ஒரு வாழ்த்து<br>
+    A message from your future ✨
+  </div>
+
+  <input id="name" placeholder="Your Name / உன் பெயர்">
+  <input id="goal" placeholder="Your Dream / உன் கனவு">
+
+  <button onclick="start()">Get Message / Message பெறு</button>
+
+  <div id="screen"></div>
+
+  <div class="share">
+    <button onclick="share()">Share on WhatsApp</button>
+  </div>
+</div>
+
+<a id="insta" href="https://www.instagram.com/_lovely__mani_0" target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1.1.5 1.6 1 .5.5.8 1 .9 1.6.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.5 1.1-1 1.6-.5.5-1 .8-1.6.9-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1.1-.5-1.6-.9-.5-.5-.8-1-.9-1.6-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.5-1.1.9-1.6.5-.5 1-.8 1.6-.9.5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2z"/>
+<path d="M12 6a6 6 0 100 12 6 6 0 000-12z"/>
+</svg>
+Follow @_lovely__mani_0
+</a>
+
+<script>
+function toggle(){
+  document.body.classList.toggle("day");
+}
+
+const messages=[
+  "நீ நினைப்பதை விட நீ strong.\nYou are stronger than you think.",
+  "இந்த வருடம் உன் வாழ்க்கை மாறும்.\nThis year your life will change.",
+  "Slow progress is still progress.\nமெதுவாக போனாலும் வெற்றி தான்.",
+  "Someone believes in you.\nயாரோ ஒருவர் உன்னை நம்புறாங்க.",
+  "Never quit now.\nஇப்போ கைவிடாதே."
+];
+
+function start(){
+  const n = document.getElementById("name").value.trim();
+  const g = document.getElementById("goal").value.trim();
+  const screen = document.getElementById("screen");
+
+  if(!n || !g){
+    alert("Name & Dream enter pannunga 🙂");
+    return;
+  }
+
+  const msg = messages[Math.floor(Math.random()*messages.length)];
+
+  screen.innerText =
+`Hi ${n} 👋
+
+Message from Jan 1, 2026 🕰
+
+Your Dream / கனவு:
+"${g}"
+
+${msg}
+
+🎉 Happy New Year 2026 🎉
+– Your Future Self ✨`;
+
+  document.querySelector(".share").style.display="block";
+}
+
+function share(){
+  const text = document.getElementById("screen").innerText;
+  window.open("https://wa.me/?text="+encodeURIComponent(text));
+}
+
+/* fireworks */
+const c=document.getElementById("fw"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight;}
+resize();window.onresize=resize;
+let p=[];
+setInterval(()=>{for(let i=0;i<30;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height/2,vx:(Math.random()-0.5)*4,vy:(Math.random()-1.5)*4,a:1});},800);
+function anim(){
+  ctx.fillStyle="rgba(0,0,0,0.2)";
+  ctx.fillRect(0,0,c.width,c.height);
+  p.forEach((o,i)=>{
+    o.x+=o.vx;o.y+=o.vy;o.a-=0.02;
+    ctx.fillStyle=`rgba(255,200,0,${o.a})`;
+    ctx.fillRect(o.x,o.y,2,2);
+    if(o.a<=0)p.splice(i,1);
+  });
+  requestAnimationFrame(anim);
+}
+anim();
+</script>
+
+</body>
+</html>
